@@ -1,4 +1,5 @@
 ﻿using Autoparkas.Models;
+using Autoparkas.Repositories;
 using System;
 
 namespace Autoparkas
@@ -7,7 +8,8 @@ namespace Autoparkas
     {
         public static void Main()
         {
-            AutoParkas manoAutoparkas = new AutoParkas();
+            FailuRepozitorija darbasSuFailais = new FailuRepozitorija("klientai.csv", "automobiliai.csv");
+            AutoParkas manoAutoparkas = new AutoParkas(darbasSuFailais);
             
             while(true)
             {

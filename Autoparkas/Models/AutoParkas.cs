@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Autoparkas.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,19 @@ namespace Autoparkas.Models
 {
     public class AutoParkas
     {
+        private readonly FailuRepozitorija _duomenys;
+
         private Automobilis[] Automobiliai;
         private Klientas[] Klientai;
 
-        public AutoParkas()
+        public AutoParkas(FailuRepozitorija duomenuRepo)
         {
             Automobiliai = new Automobilis[0];
             Klientai = new Klientas[0];
+            _duomenys = duomenuRepo;
+
+            Automobiliai = _duomenys.NuskaitytiAutomobilius();
+            Klientai = _duomenys.NuskaitytiKlientus();
         }
         public void PridetiAutomobili(Automobilis automobilis)
         {
@@ -27,6 +34,7 @@ namespace Autoparkas.Models
             }
             naujasMasyvas[index] = automobilis;
             Automobiliai = naujasMasyvas;
+            _duomenys.IssaugotiAutomobilius(Automobiliai);
         }
         public Automobilis[] GautiVisusAutomobilius()
         {
@@ -106,6 +114,8 @@ namespace Autoparkas.Models
             }
             naujasMasyvas[index] = naujasKlientas;
             Klientai = naujasMasyvas;
+
+            _duomenys.IssaugotiKlientus(Klientai);
         }
         public Klientas[] GautiVisusKlientus()
         {
