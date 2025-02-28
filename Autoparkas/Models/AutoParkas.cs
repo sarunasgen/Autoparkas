@@ -34,6 +34,7 @@ namespace Autoparkas.Models
             }
             naujasMasyvas[index] = automobilis;
             Automobiliai = naujasMasyvas;
+
             _duomenys.IssaugotiAutomobilius(Automobiliai);
         }
         public Automobilis[] GautiVisusAutomobilius()
